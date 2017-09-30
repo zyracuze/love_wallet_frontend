@@ -11,7 +11,7 @@ class HelloWorld extends Component {
       const hello = await getHello().then(r => r.data.message);
       this.setState({ hello });
     } catch(err) {
-      console.log(err);
+      this.setState({ hello: 'API ไม่เสร็จ' });
     }
   }
   render() {
