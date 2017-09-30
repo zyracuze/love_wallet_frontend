@@ -10,6 +10,12 @@ $ npm install
 $ npm run start
 ```
 
+## Builds
+Builds the app for production to the build folder
+```shell
+$ npm run build
+```
+
 ## Test
 ```shell
 $ npm run test
