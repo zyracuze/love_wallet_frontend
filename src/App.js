@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Hello from './components/Hello';
 import { getHello } from './api';
 
-class HelloWorld extends Component {
+class App extends Component {
   state = {
     hello: '',
   };
@@ -21,4 +21,4 @@ class HelloWorld extends Component {
   }
 }
 
-export default HelloWorld;
+export default App;
