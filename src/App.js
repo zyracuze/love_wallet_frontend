@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Hello from './components/Hello';
 import { getHello } from './api';
+import History from './components/History'
 
 class App extends Component {
   state = {
@@ -15,8 +16,9 @@ class App extends Component {
     }
   }
   render() {
+    // <Hello message={this.state.hello} />
     return (
-      <Hello message={this.state.hello} />
+      <History />
     );
   }
 }
