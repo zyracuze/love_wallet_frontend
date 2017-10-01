@@ -4,15 +4,45 @@ import { Nav, NavItem, Table } from 'react-bootstrap'
 
 
 const style = {
-    textAlign: 'center',
-    cursor: 'pointer'
+    textAlign: 'right'
 }
+
+const format2 = (n) => {
+    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+}
+
+const twoDigits = (number) => ("0" + number).slice(-2)
 
 class History extends Component {
 
     state = {
         nowTab: 1
     }
+
+    data = [
+        {
+            t_date: "1483228800000",
+            amount: 500,
+            user_id: 1,
+            payment_method: "TopUp-Debit Card",
+            order_id: null
+        },
+        {
+            t_date: "1483228800000",
+            amount: 1000,
+            user_id: 1,
+            payment_method: "TopUp-Card",
+            order_id: null
+        },
+        {
+            t_date: "1483228800000",
+            amount: 1000,
+            user_id: 1,
+            payment_method: "Paid",
+            order_id: 1
+        },
+
+    ]
 
     handleSelect(selectedKey) {
         this.setState({nowTab: selectedKey})
@@ -23,36 +53,56 @@ class History extends Component {
         alert('fdsfsfa')
     }
 
+    changeTimestampToDate(datetime) {
+        // datetime = parseInt(datetime)
+        const monthsName = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
+        datetime = Date.now()
+        const date = new Date(datetime)
+        return date.getDate() + ' ' + monthsName[date.getMonth()] + ' ' + (date.getFullYear() + 543) + '  ' + twoDigits(date.getHours()) + '.' + twoDigits(date.getMinutes()) + ' น.'
+    }
+
+    componentWillMount() {
+    //     const url = ''
+    //     fetch(url)
+    //     .then(function(response) {
+    //     if (response.status >= 400) {
+    //        throw new Error("Bad response from server");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then(function(data) {
+    //      this.data = data
+    //   });
+    }
+    
+
     render() {
         return (
             <div>
                 <Nav bsStyle="tabs" activeKey={this.state.nowTab} onSelect={this.handleSelect.bind(this)}>
-                    <NavItem id="sdfsdf" eventKey={1}>History</NavItem>
-                    <NavItem eventKey={2}>เติมเงิน</NavItem>
-                    <NavItem eventKey={3}>จ่ายเงิน</NavItem>
+                    <NavItem eventKey={1}>History</NavItem>
                 </Nav>
                 <Table striped condensed hover>
                     <thead>
                         <tr>
-                            <th>Date / Time</th>
-                            <th>By</th>
-                            <th>จำนวนเงิน</th>
+                            <th>วัน / เวลา</th>
+                            <th>ประเภท</th>
+                            <th style={style}>จำนวนเงิน (บาท)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>9:00</td>
-                            <td>Debit</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <td>12:00</td>
-                            <td>Coffee</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
+                        {this.data.map((data, index) => {
+                            return (
+                                <tr>
+                                    <td id={'history_table_datetime_' + (index + 1)} >{this.changeTimestampToDate(data.t_date)}</td>
+                                    <td id={'history_table_by_' + (index + 1)}>{data.payment_method}</td>
+                                    <td style={style} id={'history_table_amount_' + (index + 1)}>{format2(data.amount)}</td>
+                                </tr>
+                            )
+                        })}
+                        {/* <tr>
                             <td style={style} onClick={this.loadMore.bind(this)} colSpan="3">Load More ...</td>
-                        </tr>
+                        </tr> */}
                     </tbody>
                 </Table>
           </div>
