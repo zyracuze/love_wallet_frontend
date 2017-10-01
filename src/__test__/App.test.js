@@ -8,7 +8,7 @@ import Hello from './../components/Hello';
 Enzyme.configure({ adapter: new Adapter() });
 
 
-describe('<HelloWorld />', () => {
+describe('<Hello />', () => {
   it('renders "Hello_World"', () => {
     const expected = 'Hello_World';
     const wrapper = shallow(<Hello message={expected} />);
