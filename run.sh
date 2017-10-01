@@ -1,3 +1,4 @@
+npm install
 npm run build
 docker container rm -f frontend
 docker image build -t frontend .
