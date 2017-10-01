@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Hello from './components/Hello';
 import { getHello } from './api';
 import History from './components/History'
+import ProfileContainer from './containers/Profile';
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+} from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -18,7 +25,21 @@ class App extends Component {
   render() {
     // <Hello message={this.state.hello} />
     return (
-      <History />
+      <Router>
+        <div>
+          <ul>
+            <li><Link to="/">Profile</Link></li>
+            <li><Link to="/history">History</Link></li>
+            <li><Link to="/qr">Scan QR</Link></li>
+          </ul>
+    
+          <hr/>
+    
+          <Route exact path="/" component={ProfileContainer}/>
+          <Route path="/history" component={History}/>
+          <Route path="/qr" component={() => (<div> QR </div>)}/>
+        </div>
+      </Router>
     );
   }
 }
